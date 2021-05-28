@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+app.post('/name', (req, res) => {
+  var string =req.body.first + " " + req.body.last;
+  res.json({ name: string });
+});
+
 app.get('/json', (req, res) => {
   if (process.env.MESSAGE_STYLE == 'uppercase') {
     res.json({ "message": "HELLO JSON" })
