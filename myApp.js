@@ -20,6 +20,29 @@ app.get('/json', (req, res) => {
 
 app.use('/public', express.static(__dirname + '/public'));
 
+app.get('/now', (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+},
+(req, res) => {
+  res.send({time: req.time})
+});
+
+app.get('/:word/echo', (req, res) => {
+  const { word } = req.params;
+  res.json({ echo: word});
+});
+
+/* const middleware = (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+};
+
+app.get("/now", middleware, (req, res) => {
+  res.send({
+    time: req.time
+  });
+}); */
 
 /* function logOriginalUrl(req, res, next) {
   console.log('Request URL:', req.originalUrl)
